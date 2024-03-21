@@ -1,0 +1,209 @@
+/* admin.css */
+
+/* Header */
+.admin__header {
+    background-color: #333;
+    color: #fff;
+    padding: 30px 0;
+    height: 25px; /* Adjust the height as desired */
+  }
+  
+  .admin_container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  /* Navigation */
+  .admin__navbar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .admin_ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  .admin_ul li {
+    margin-right: 20px;
+  }
+  
+  .admin_ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .admin_ul li a:hover,
+  .admin_ul li a.active {
+    background-color: #555;
+  }
+  
+  /* Loading spinner */
+  .loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 2s linear infinite;
+    margin: 0 auto;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  #cancel-button {
+    background-color: #ff0000; /* Red background color */
+    color: #ffffff; /* White text color */
+    padding: 6px 14px; /* Padding around the text */
+    border: none; /* No border */
+    cursor: pointer; /* Cursor on hover */
+    margin-top: 10px; /* Add some space above the button */
+    float: right;
+  }
+  
+  #cancel-button:hover {
+    background-color: #cc0000; /* Darker red background color on hover */
+  }
+  .product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .product-item {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-item div {
+    margin-bottom: 10px;
+  }
+
+  .admin-cart-container {
+    margin: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(300px, 1fr)); /* Three columns layout */
+    grid-gap: 20px;
+}
+
+.order-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.items-container {
+    margin-top: 10px;
+}
+
+.item {
+    border: 1px solid #eee;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Style the select dropdown */
+select {
+  padding: 8px 16px; /* Add padding to make it visually appealing */
+  font-size: 16px; /* Set font size */
+  border: 1px solid #ccc; /* Add border */
+  border-radius: 4px; /* Add border radius */
+  background-color: #fff; /* Set background color */
+  color: #333; /* Set text color */
+}
+
+/* Style the select dropdown when hovered */
+select:hover {
+  border-color: #999; /* Change border color on hover */
+}
+
+/* Style the select dropdown when focused */
+select:focus {
+  outline: none; /* Remove default focus outline */
+  border-color: #007bff; /* Change border color when focused */
+}
+
+/* Style the select dropdown options */
+option {
+  padding: 8px 16px; /* Add padding to options */
+}
+
+/* Style the select dropdown options when hovered */
+option:hover {
+  background-color: #f0f0f0; /* Change background color on hover */
+}
+
+/* Style the select dropdown options when selected */
+option:checked {
+  background-color: #007bff; /* Change background color when selected */
+  color: #fff; /* Change text color when selected */
+}
+
+.top-selling-products-container {
+  width: 100%;
+  max-width: 600px; /* Adjust this value according to your design */
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #E5E4E2;
+  box-shadow: 0 0 10px rgba(0,0,0,.1);
+}
+
+/* Style for the product list container */
+.product-list-container {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.grid-two-column {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* Style for the product list */
+.product-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Style for each product item */
+.product-item {
+  margin-bottom: 10px;
+}
+
+/* Style for the product number */
+.product-number {
+  font-weight: lighter;
+  margin-right: 5px;
+  font-size: large;
+}
+
+/* Style for the product name */
+.product-name {
+  margin-right: 10px;
+  font-size: 17px;
+}
+
+/* Style for the product amount */
+.product-amount {
+  color: #666;
+  float: right;
+  font-size: 12px;
+}
