@@ -16,7 +16,7 @@ function AdminCart() {
 
   const showCart = async () => {
     try {
-      const res = await fetch("http://localhost:3005/api/admin/cart", {
+      const res = await fetch(`http://localhost:3005/api/admin/cart`, {
         method: "GET",
         headers: {
           Authorization: isAuthenticated,
@@ -29,7 +29,9 @@ function AdminCart() {
           ...order,
           createdAt: new Date(order.createdAt).toLocaleString(),
         }));
+
         setOrders(formattedOrders);
+
 
         const sales = formattedOrders.map((order) => order.totalAmount);
         setSalesData(sales);
@@ -125,12 +127,9 @@ function AdminCart() {
     }
   };
 
-
   const ordersChartData = {
-    labels: orders.map((order) => {
-      // Extract day from createdAt
+    labels: Array.from(new Set(orders.map(order => {
       const date = new Date(order.createdAt);
-
       if (chartType === "month") {
         return date.toLocaleDateString("en-IN", { month: "short" });
       } else if (chartType === "year") {
@@ -138,7 +137,7 @@ function AdminCart() {
       } else {
         return date.toLocaleDateString("en-IN", { weekday: "long" });
       }
-    }),
+    }))),
     datasets: [
       {
         label:
@@ -150,7 +149,22 @@ function AdminCart() {
         backgroundColor: "blue",
         borderColor: "rgba(0,0,0,1)",
         borderWidth: 1.5,
-        data: ordersData,
+        data: orders.map(order => {
+          const date = new Date(order.createdAt);
+          const formattedDate = date.toLocaleDateString("en-IN", { year: "numeric", month: "2-digit", day: "2-digit" });
+          return {
+            date: formattedDate,
+            count: 1 // Count each order as 1
+          };
+        }).reduce((acc, curr) => {
+          const existingItem = acc.find(item => item.date === curr.date);
+          if (existingItem) {
+            existingItem.count += curr.count;
+          } else {
+            acc.push(curr);
+          }
+          return acc;
+        }, []).map(item => item.count)
       },
     ],
   };
@@ -202,10 +216,8 @@ function AdminCart() {
   };
 
   const salesChartData = {
-    labels: orders.map((order) => {
-      // Extract day from createdAt
+    labels: Array.from(new Set(orders.map(order => {
       const date = new Date(order.createdAt);
-
       if (chartType === "month") {
         return date.toLocaleDateString("en-IN", { month: "short" });
       } else if (chartType === "year") {
@@ -213,7 +225,7 @@ function AdminCart() {
       } else {
         return date.toLocaleDateString("en-IN", { weekday: "long" });
       }
-    }),
+    }))),
     datasets: [
       {
         label:
@@ -226,7 +238,22 @@ function AdminCart() {
         backgroundColor: "blue",
         borderColor: "rgba(0,0,0,1)",
         borderWidth: 1.5,
-        data: salesData,
+        data: orders.map(order => {
+          const date = new Date(order.createdAt);
+          const formattedDate = date.toLocaleDateString("en-IN", { year: "numeric", month: "2-digit", day: "2-digit" });
+          return {
+            date: formattedDate,
+            amount: parseFloat(order.totalAmount)
+          };
+        }).reduce((acc, curr) => {
+          const existingItem = acc.find(item => item.date === curr.date);
+          if (existingItem) {
+            existingItem.amount += curr.amount;
+          } else {
+            acc.push(curr);
+          }
+          return acc;
+        }, []).map(item => item.amount)
       },
     ],
   };
@@ -326,6 +353,7 @@ function AdminCart() {
           </div>
         ))}
       </div>
+      
       <h2 style={{ marginBottom: "20px", marginLeft: "30px" }}>
         Sales & orders Analytics
       </h2>

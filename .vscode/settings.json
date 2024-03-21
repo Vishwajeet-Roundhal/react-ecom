@@ -2,6 +2,9 @@
   "cSpell.words": [
     "filterproduct"
   ],
-  "workbench.colorCustomizations": {},
+  "workbench.colorCustomizations": {
+    "editorGutter.modifiedBackground": "#ffffff00", // Change to the color of your choice or set it to transparent
+    "editorOverviewRuler.modifiedForeground": "#ffffff00" // Change to the color of your choice or set it to transparent
+  },
   "json.schemas": []
 }
